@@ -14,6 +14,7 @@ public class EngInt2WordController {
     @GetMapping("/{number}")
     public ResponseEntity<String> int2EnglishWord(@PathVariable String number) {
         try {
+            number=number.replaceAll("\\s+", "");
             String regex = "^-?\\d{1,10}$";
             if (!number.matches(regex))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not an integer number or length more than 10 digits");
@@ -25,7 +26,7 @@ public class EngInt2WordController {
             else if (intNumber < Integer.MIN_VALUE)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("less than MIN_VALUE.");
 
-            String word = NumberToEngWordConverter.convert(intNumber.intValue());
+            String word = NumberToEngWordConverter.convert(intNumber);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(word.substring(0, 1).toUpperCase() + word.substring(1));
         } catch (NumberFormatException exception) {

@@ -20,7 +20,7 @@ public class ApiFunctionalityTests {
 
 
     @Test
-    public void testHexadecimalStringOne() {
+    public void testHexadecimalStringRegularOne() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0xBBF1", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
@@ -31,7 +31,7 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testHexadecimalStringTwo() {
+    public void testHexadecimalStringRegularTwo() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x33A3", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":false," +
@@ -42,12 +42,54 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testHexadecimalStringTree() {
+    public void testHexadecimalStringRegularThree() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x99C1", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":156,\"descale_required\":false," +
                 "\"have_another_one_carl\":true}";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testHexadecimalStringRegularFour() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0000", String.class);
+
+        String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
+                "\"water_empty_fault\":false,\"number_of_cups_today\":0,\"descale_required\":false," +
+                "\"have_another_one_carl\":false}";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testHexadecimalStringRegularFive() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0101 ", String.class);
+
+        String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
+                "\"water_empty_fault\":false,\"number_of_cups_today\":16,\"descale_required\":false," +
+                "\"have_another_one_carl\":false}";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+    @Test
+    public void testHexadecimalStringRegularSix() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0xF00f ", String.class);
+
+        String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":true," +
+                "\"water_empty_fault\":true,\"number_of_cups_today\":0,\"descale_required\":true," +
+                "\"have_another_one_carl\":true}";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+    @Test
+    public void testHexadecimalStringRegularSeven() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0ff0", String.class);
+
+        String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
+                "\"water_empty_fault\":false,\"number_of_cups_today\":255,\"descale_required\":false," +
+                "\"have_another_one_carl\":false}";
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
@@ -62,7 +104,7 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testNumberToWordEngOne() {
+    public void testNumberToWordEngRegularOne() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/113", String.class);
 
         String expectedValue = "One hundred thirteen";
@@ -71,7 +113,7 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testNumberToWordEngTwo() {
+    public void testNumberToWordEngEdgeCase() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-0", String.class);
 
         String expectedValue = "Zero";
@@ -80,11 +122,57 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testNumberToWordEngThree() {
+    public void testNumberToWordEngNegativeNumber() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-85", String.class);
 
         String expectedValue = "Negative eighty five";
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testNumberToWordEngEdgeCaseIntLimitMax() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/2147483647", String.class);
+
+        String expectedValue = "Two billion one hundred forty seven million four hundred eighty three thousand six hundred forty seven";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testNumberToWordEngEdgeCaseIntLimitMin() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2147483648", String.class);
+
+        String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
+                "three thousand six hundred forty eight";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+    @Test
+    public void testNumberToWordEngEdgeCaseIntLimitMinSpace() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2 147 483 648", String.class);
+
+        String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
+                "three thousand six hundred forty eight";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testNumberToWordEngErrorEdgeCaseIntLimitMax() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/2147483648", String.class);
+
+        String expectedValue = "over MAX_VALUE.";
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testNumberToWordEngErrorEdgeCaseIntLimitMin() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2147483649", String.class);
+
+        String expectedValue = "less than MIN_VALUE.";
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
 

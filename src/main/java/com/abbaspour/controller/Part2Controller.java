@@ -19,14 +19,17 @@ public class Part2Controller {
     public ResponseEntity<String> decode(@PathVariable String hexString) {
         String json = "";
         try {
+            hexString=hexString.trim();
             String regex = "^0[xX][0-9A-Fa-f]{4}$";
             boolean isMatch = hexString.matches(regex);
             if (!isMatch)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not an acceptable hexadecimal. try like 0x123f");
 
             String bits=hexToBitString(hexString);
-            System.out.println(bits);
+//            System.out.println(bits);
             BitMap bitMap = new BitMap();
+            if (bits.length()<16) // in case of zerro in upper left
+                bits+="0".repeat(16);
 
             bitMap.setMachine_on(bits.charAt(0)=='1'); //1 machine_on
 
