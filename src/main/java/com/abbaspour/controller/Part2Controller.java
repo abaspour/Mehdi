@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.util.BitSet;
 
 @RestController
 @CrossOrigin(maxAge = 3600)
