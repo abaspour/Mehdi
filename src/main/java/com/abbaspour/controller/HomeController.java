@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@CrossOrigin(maxAge = 3600)
 public class HomeController {
 
     @GetMapping()
