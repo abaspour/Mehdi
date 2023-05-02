@@ -14,6 +14,7 @@ public class FraInt2WordController {
     @GetMapping("/{number}")
     public ResponseEntity<String> int2FraWord(@PathVariable String number) {
         try {
+            number=number.replaceAll("\\s+", "");
             String regex = "^-?\\d{1,10}$";
             if (!number.matches(regex))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not an integer number or length more than 10 digits");

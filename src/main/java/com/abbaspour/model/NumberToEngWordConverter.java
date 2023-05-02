@@ -14,7 +14,7 @@ public class NumberToEngWordConverter {
             "", "thousand", "million", "billion"
     };
 
-    public static String convert(int number) {
+    public static String convert(Long number) {
         if (number == 0) {
             return "zero";
         }
@@ -26,13 +26,12 @@ public class NumberToEngWordConverter {
 
         for (int i = 0; number > 0; i++) {
             if (number % 1000 != 0) {
-                word = convertLessThan1000(number % 1000) + THOUSANDS[i] + " " + word;
                 word = convertLessThan1000((int)(number % 1000),"") + " "+ THOUSANDS[i] + " " + word;
             }
             number /= 1000;
         }
 
-        return word.trim();
+        return word.trim().replace("  "," ");
     }
 
     private static String convertLessThan1000(int number, String and) {
