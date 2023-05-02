@@ -24,9 +24,12 @@ public class NumberToEngWordConverter {
 
         String word = "";
 
+        boolean shouldAddAndString = number > 100;
+
         for (int i = 0; number > 0; i++) {
             if (number % 1000 != 0) {
-                word = convertLessThan1000((int)(number % 1000)) +" "+ THOUSANDS[i] + " " + word;
+                word = convertLessThan1000((int)(number % 1000), shouldAddAndString) +" "+ THOUSANDS[i] + " " + word;
+                shouldAddAndString = false;
             }
             number /= 1000;
         }
@@ -34,7 +37,7 @@ public class NumberToEngWordConverter {
         return word.trim().replace("  "," ");
     }
 
-    private static String convertLessThan1000(int number) {
+    private static String convertLessThan1000(int number, boolean shouldAddAndString) {
         if (number == 0) {
             return "";
         }
@@ -44,6 +47,11 @@ public class NumberToEngWordConverter {
         if (number < 100) {
             return TENS[number / 10] + " " + ONES[number % 10];
         }
-        return ONES[number / 100] + " hundred " + convertLessThan1000(number % 100);
+        String andString = "";
+        if (shouldAddAndString) {
+            andString = "and ";
+        }
+
+        return ONES[number / 100] + " hundred " + andString + convertLessThan1000(number % 100, false);
     }
 }

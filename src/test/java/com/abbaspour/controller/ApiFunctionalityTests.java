@@ -104,10 +104,19 @@ public class ApiFunctionalityTests {
     }
 
     @Test
-    public void testNumberToWordEngRegularOne() {
+    public void testNumberToWordEngRegularWithoutAnd() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/100", String.class);
+
+        String expectedValue = "One hundred";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
+    public void testNumberToWordEngRegular() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/113", String.class);
 
-        String expectedValue = "One hundred thirteen";
+        String expectedValue = "One hundred and thirteen";
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
@@ -134,7 +143,8 @@ public class ApiFunctionalityTests {
     public void testNumberToWordEngEdgeCaseIntLimitMax() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/2147483647", String.class);
 
-        String expectedValue = "Two billion one hundred forty seven million four hundred eighty three thousand six hundred forty seven";
+        String expectedValue = "Two billion one hundred forty seven million four hundred eighty" +
+                " three thousand six hundred and forty seven";
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
@@ -144,7 +154,7 @@ public class ApiFunctionalityTests {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2147483648", String.class);
 
         String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
-                "three thousand six hundred forty eight";
+                "three thousand six hundred and forty eight";
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
@@ -153,7 +163,7 @@ public class ApiFunctionalityTests {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2 147 483 648", String.class);
 
         String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
-                "three thousand six hundred forty eight";
+                "three thousand six hundred and forty eight";
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedValue, response.getBody());
     }
