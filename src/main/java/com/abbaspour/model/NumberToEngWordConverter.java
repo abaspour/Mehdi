@@ -27,6 +27,7 @@ public class NumberToEngWordConverter {
         for (int i = 0; number > 0; i++) {
             if (number % 1000 != 0) {
                 word = convertLessThan1000(number % 1000) + THOUSANDS[i] + " " + word;
+                word = convertLessThan1000((int)(number % 1000),"") + " "+ THOUSANDS[i] + " " + word;
             }
             number /= 1000;
         }
@@ -34,16 +35,16 @@ public class NumberToEngWordConverter {
         return word.trim();
     }
 
-    private static String convertLessThan1000(int number) {
+    private static String convertLessThan1000(int number, String and) {
         if (number == 0) {
             return "";
         }
         if (number < 20) {
-            return ONES[number];
+            return  and +ONES[number];
         }
         if (number < 100) {
-            return TENS[number / 10] + " " + ONES[number % 10];
+            return and +TENS[number / 10] + " " + ONES[number % 10];
         }
-        return ONES[number / 100] + " hundred " + convertLessThan1000(number % 100);
+        return ONES[number / 100] + " hundred " + convertLessThan1000(number % 100," and ");
     }
 }
