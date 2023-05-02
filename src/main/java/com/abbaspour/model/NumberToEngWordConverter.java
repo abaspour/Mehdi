@@ -24,7 +24,7 @@ public class NumberToEngWordConverter {
 
         String word = "";
 
-        boolean shouldAddAndString = number > 100;
+        boolean shouldAddAndString = number > 100 && number % 100 > 0;
 
         for (int i = 0; number > 0; i++) {
             if (number % 1000 != 0) {

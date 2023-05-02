@@ -113,6 +113,15 @@ public class ApiFunctionalityTests {
     }
 
     @Test
+    public void testNumberToWordEngRegularWithoutAndAboveHundred() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/160100", String.class);
+
+        String expectedValue = "One hundred sixty thousand one hundred";
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedValue, response.getBody());
+    }
+
+    @Test
     public void testNumberToWordEngRegular() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/113", String.class);
 
