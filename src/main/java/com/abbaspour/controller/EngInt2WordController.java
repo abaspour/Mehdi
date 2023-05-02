@@ -14,9 +14,9 @@ public class EngInt2WordController {
     @GetMapping("/{number}")
     public ResponseEntity<String> int2EnglishWord(@PathVariable String number) {
         try {
-            String regex = "^-?\\d{1,9}$";
+            String regex = "^-?\\d{1,10}$";
             if (!number.matches(regex))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not an integer number");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not an integer number or length more than 10 digits");
 
             Long intNumber = Long.valueOf(number);
 
@@ -28,11 +28,12 @@ public class EngInt2WordController {
             String word = NumberToEngWordConverter.convert(intNumber.intValue());
             return ResponseEntity.status(HttpStatus.OK)
                     .body(word.substring(0, 1).toUpperCase() + word.substring(1));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Some Error occured.");
+        } catch (NumberFormatException exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not an integer number");
+        } catch (ArithmeticException exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Number too small or too big.");
+        } catch (Throwable e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Some Error occurred.");
         }
-
     }
-
 }
-
