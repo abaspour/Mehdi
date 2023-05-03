@@ -1,5 +1,11 @@
 package com.abbaspour.model;
 
+import java.math.BigInteger;
+/**
+ * @author Mehdi Abbaspour
+ * @version 1.0
+ * created: May 1, 2023
+ */
 public class BitMap {
 
     private Boolean machine_on;
@@ -65,4 +71,5 @@ public class BitMap {
     public void setHave_another_one_carl(Boolean have_another_one_carl) {
         this.have_another_one_carl = have_another_one_carl;
     }
+
 }

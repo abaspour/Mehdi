@@ -105,7 +105,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularWithoutAnd() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/100", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/100", String.class);
 
         String expectedValue = "One hundred";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -114,7 +114,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularWithoutAndAboveHundred() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/160100", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/160100", String.class);
 
         String expectedValue = "One hundred sixty thousand one hundred";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -123,7 +123,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegular() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/113", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/113", String.class);
 
         String expectedValue = "One hundred and thirteen";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -132,7 +132,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularLessThanTwenty() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/13", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/13", String.class);
 
         String expectedValue = "Thirteen";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -141,7 +141,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularLessThanHundred() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/85", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/85", String.class);
 
         String expectedValue = "Eighty five";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -150,7 +150,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularThousands() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/5 237", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/5 237", String.class);
 
         String expectedValue = "Five thousand two hundred and thirty seven";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -159,7 +159,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngRegularNegativeTen() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-10", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-10", String.class);
 
         String expectedValue = "Negative ten";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -168,7 +168,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngEdgeCase() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-0", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-0", String.class);
 
         String expectedValue = "Zero";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -177,7 +177,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngNegativeNumber() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-85", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-85", String.class);
 
         String expectedValue = "Negative eighty five";
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -186,7 +186,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngEdgeCaseIntLimitMax() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/2147483647", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/2147483647", String.class);
 
         String expectedValue = "Two billion one hundred forty seven million four hundred eighty" +
                 " three thousand six hundred and forty seven";
@@ -196,7 +196,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngEdgeCaseIntLimitMin() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2147483648", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-2147483648", String.class);
 
         String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
                 "three thousand six hundred and forty eight";
@@ -205,7 +205,7 @@ public class ApiFunctionalityTests {
     }
     @Test
     public void testNumberToWordEngEdgeCaseIntLimitMinSpace() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2 147 483 648", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-2 147 483 648", String.class);
 
         String expectedValue = "Negative two billion one hundred forty seven million four hundred eighty " +
                 "three thousand six hundred and forty eight";
@@ -215,7 +215,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngErrorEdgeCaseIntLimitMax() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/2147483648", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/2147483648", String.class);
 
         String expectedValue = "over MAX_VALUE.";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -224,7 +224,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngErrorEdgeCaseIntLimitMin() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-2147483649", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-2147483649", String.class);
 
         String expectedValue = "less than MIN_VALUE.";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -233,7 +233,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngErrorHandlingInvalidNumber() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-85a", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-85a", String.class);
 
         String expectedValue = "not an integer number or length more than 10 digits";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -242,7 +242,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngErrorHandlingTooSmallNumber() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/-9999999999", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/-9999999999", String.class);
 
         String expectedValue = "less than MIN_VALUE.";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -251,7 +251,7 @@ public class ApiFunctionalityTests {
 
     @Test
     public void testNumberToWordEngErrorHandlingTooLargeNumber() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-eng-word/9999999999", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/int-to-word/English/9999999999", String.class);
 
         String expectedValue = "over MAX_VALUE.";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
