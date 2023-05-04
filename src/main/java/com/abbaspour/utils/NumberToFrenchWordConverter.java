@@ -32,7 +32,7 @@ public class NumberToFrenchWordConverter  {
         String word=convert2fr(n);
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
-    public static String convert2fr(long n) {
+    private static String convert2fr(long n) {
 
         if (n < 0) {
             return "moins " + convertToFrench(-n);
@@ -40,7 +40,7 @@ public class NumberToFrenchWordConverter  {
         return convertToFrench(n);
     }
 
-    public static String convertToFrench(long n) {
+    private static String convertToFrench(long n) {
         if (n < 0) {
             return "moins " + convertToFrench(-n);
         }

@@ -1,6 +1,6 @@
 package com.abbaspour.controller;
-import com.abbaspour.utils.NumberToEnglishWordConverter;
-import com.abbaspour.utils.NumberToFrenchWordConverter;
+import com.abbaspour.service.IntegerToWordServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(maxAge = 3600)
 @RequestMapping(value = "api/int-to-word")
 public class Int2WordController {
+    @Autowired
+    IntegerToWordServiceImpl integerToWordService;
     @CrossOrigin
     @GetMapping("/{language}/{number}")
     public ResponseEntity<String> int2Word(@PathVariable String language, @PathVariable String number) {
@@ -33,9 +35,9 @@ public class Int2WordController {
 
             String word="";
             if (language.equalsIgnoreCase("English"))
-                word = NumberToEnglishWordConverter.convert(intNumber);
+                word = integerToWordService.toEnglishWordConverter(intNumber);
             else if (language.equalsIgnoreCase("French"))
-                word = NumberToFrenchWordConverter.convert(intNumber);
+                word = integerToWordService.toFrenchWordConverter(intNumber);
             else
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Language not supported.");
 

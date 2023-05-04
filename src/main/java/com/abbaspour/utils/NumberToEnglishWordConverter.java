@@ -31,7 +31,7 @@ public class NumberToEnglishWordConverter {
         String word=convert2eng(number);
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
-    public static String convert2eng(Long number) {
+    private static String convert2eng(Long number) {
          if (number < 0) {
             return "negative " + convert2eng(Math.abs(number));
         }

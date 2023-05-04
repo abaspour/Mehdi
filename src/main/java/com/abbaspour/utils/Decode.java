@@ -1,6 +1,7 @@
 package com.abbaspour.utils;
 
 import com.abbaspour.model.BitMap;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 
@@ -9,6 +10,7 @@ import java.math.BigInteger;
  * @version 1.0
  * created: May 3, 2023
  */
+@Service
 public class Decode {
     /**
      * Description: static function for generating BitMap class according to Pattern.

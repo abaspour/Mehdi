@@ -19,7 +19,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringRegularOne() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0xBBF1", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0xBBF1", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":191,\"descale_required\":false," +
@@ -30,7 +30,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringRegularTwo() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x33A3", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x33A3", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":58,\"descale_required\":false," +
@@ -41,7 +41,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringRegularThree() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x99C1", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x99C1", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":156,\"descale_required\":false," +
@@ -52,7 +52,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringRegularFour() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0000", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x0000", String.class);
 
         String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":0,\"descale_required\":false," +
@@ -63,7 +63,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringRegularFive() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0101 ", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x0101 ", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":16,\"descale_required\":false," +
@@ -73,7 +73,7 @@ public class BitMapTest {
     }
     @Test
     public void testHexadecimalStringRegularSix() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0xF00f ", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0xF00f ", String.class);
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":true," +
                 "\"water_empty_fault\":true,\"number_of_cups_today\":0,\"descale_required\":true," +
@@ -83,7 +83,7 @@ public class BitMapTest {
     }
     @Test
     public void testHexadecimalStringRegularSeven() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x0ff0", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x0ff0", String.class);
 
         String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
                 "\"water_empty_fault\":false,\"number_of_cups_today\":255,\"descale_required\":false," +
@@ -94,7 +94,7 @@ public class BitMapTest {
 
     @Test
     public void testHexadecimalStringErrorHandling() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/api/part-2/0x99Z1", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/decode/0x99Z1", String.class);
 
         String expectedValue = "Not an acceptable hexadecimal. try like 0x123f";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

@@ -72,4 +72,17 @@ public class BitMap {
         this.have_another_one_carl = have_another_one_carl;
     }
 
+    public BitMap(Boolean machine_on, Boolean grinding_beans, Boolean empty_grounds_fault, Boolean water_empty_fault,
+                  Integer number_of_cups_today, Boolean descale_required, Boolean have_another_one_carl) {
+        this.machine_on = machine_on;
+        this.grinding_beans = grinding_beans;
+        this.empty_grounds_fault = empty_grounds_fault;
+        this.water_empty_fault = water_empty_fault;
+        this.number_of_cups_today = number_of_cups_today;
+        this.descale_required = descale_required;
+        this.have_another_one_carl = have_another_one_carl;
+    }
+
+    public BitMap() {
+    }
 }
