@@ -1,7 +1,6 @@
 package com.abbaspour.utils;
 
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 
 import static org.junit.Assert.assertEquals;
 
