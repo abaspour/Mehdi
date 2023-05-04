@@ -1,5 +1,8 @@
 package com.abbaspour.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.math.BigInteger;
 /**
  * @author Mehdi Abbaspour
@@ -84,5 +87,16 @@ public class BitMap {
     }
 
     public BitMap() {
+    }
+
+    @Override
+    public String toString() {
+        String json = "";
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(this);
+        } catch (Throwable e) {
+            return null;
+        }
     }
 }

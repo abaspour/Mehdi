@@ -44,12 +44,10 @@ public class DecodeController {
         try {
 
             BitMap bitMap= decodeService.decode(hexString);
-            if (bitMap==null)
+            if (bitMap == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not an acceptable hexadecimal. try like 0x123f");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            json = objectMapper.writeValueAsString(bitMap);
-            return ResponseEntity.status(HttpStatus.OK).body(json);
+            return ResponseEntity.status(HttpStatus.OK).body(bitMap.toString());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Some Error occured.");
         }
