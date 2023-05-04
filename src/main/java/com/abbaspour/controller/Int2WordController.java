@@ -1,5 +1,5 @@
 package com.abbaspour.controller;
-import com.abbaspour.service.IntegerToWordServiceImpl;
+import com.abbaspour.service.IntegerToWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "api/int-to-word")
 public class Int2WordController {
     @Autowired
-    IntegerToWordServiceImpl integerToWordService;
+    IntegerToWordService integerToWordService;
     @CrossOrigin
     @GetMapping("/{language}/{number}")
     public ResponseEntity<String> int2Word(@PathVariable String language, @PathVariable String number) {

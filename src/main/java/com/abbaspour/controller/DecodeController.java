@@ -2,9 +2,7 @@ package com.abbaspour.controller;
 
 
 import com.abbaspour.model.BitMap;
-import com.abbaspour.service.DecodeService;
-import com.abbaspour.utils.Decode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.abbaspour.service.DecodeServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +34,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "api/decode")
 public class DecodeController {
     @Autowired
-    DecodeService decodeService;
+    DecodeServiceInterface decodeServiceInterface;
     @CrossOrigin
     @GetMapping("/{hexString}")
     public ResponseEntity<String> decode(@PathVariable String hexString) {
         String json = "";
         try {
 
-            BitMap bitMap= decodeService.decode(hexString);
+            BitMap bitMap= decodeServiceInterface.decode(hexString);
             if (bitMap == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not an acceptable hexadecimal. try like 0x123f");
 

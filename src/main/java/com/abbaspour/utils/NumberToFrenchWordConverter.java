@@ -32,10 +32,10 @@ public class NumberToFrenchWordConverter  {
         String word=convert2fr(n);
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
-    private static String convert2fr(long n) {
+    private static String convert2fr(Long n) {
 
         if (n < 0) {
-            return "moins " + convertToFrench(-n);
+            return "moins " + convertToFrench(Math.abs(n));
         }
         return convertToFrench(n);
     }
@@ -46,12 +46,12 @@ public class NumberToFrenchWordConverter  {
         }
 
         if (n < 20) {
-            return units[(int) n];
+            return units[(int) (n % 100)];
         }
 
         if (n < 100) {
-            int t = (int) n / 10;
-            int u = (int) n % 10;
+            int t = (int) (n / 10);
+            int u = (int) (n % 10);
 
             if (u == 0) {
                 return tens[t];
@@ -63,7 +63,7 @@ public class NumberToFrenchWordConverter  {
         }
 
         for (int number : numberMap.keySet()) {
-            if (n < number * 1000) {
+            if (n < (int) number * 1000) {
                 int quotient = (int)(n / number);
                 int remainder =(int)(n % number);
 
