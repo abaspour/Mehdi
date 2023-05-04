@@ -15,7 +15,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
-
+/**
+ * @author Mehdi Abbaspour
+ * @version 1.0
+ * created: May 1, 2023
+ *
+ * Swagger Configuration
+*/
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
