@@ -11,7 +11,7 @@ public class NumberToFrenchWordConverter  {
     private static final String[] tens = {"", "", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingt", "quatre-vingt-dix"};
 
     private static final HashMap<Integer, String> numberMap = new HashMap<Integer, String>();
-    static int[] myArray = { 0, 100, 1000, 1000000 , 1000000000 };
+    private static final int[] myArray = { 0, 100, 1000, 1000000 , 1000000000 };
     static {
         numberMap.put(0, "zéro");
         numberMap.put(100, "cent");
