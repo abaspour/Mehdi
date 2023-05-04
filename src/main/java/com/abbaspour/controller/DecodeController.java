@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.2
  * created: May 1, 2023
  * updated: May 3, 2023
- * Description: Rest Controller for api/part-2/{hexString} request returning json response according to bit map table
+ * Description: Rest Controller for api/decode/{hexString} request returning json response according to bit map table
  * bits property Type
  * 1 machine_on bool
  * 2 grinding_beans bool
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * 14,16 have_another_one_carl bool
  *
  * Sample:
- * request: api/part-2/0xBBF1
+ * request: api/decode/0xBBF1
  * response: {"machine_on": true, "grinding_beans": false, "empty_grounds_fault": false,
  * "water_empty_fault": false, "number_of_cups_today": 191, "descale_required": false,
  * "have_another_one_carl": true}
@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.*;
 public class DecodeController {
     @Autowired
     DecodeServiceInterface decodeServiceInterface;
-    @CrossOrigin
     @GetMapping("/{hexString}")
     public ResponseEntity<String> decode(@PathVariable String hexString) {
         String json = "";
