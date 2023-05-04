@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class NumberToFrenchWordConverterTest {
 
     @Test
-    public void testFrenchRegularWithoutAnd() {
+    public void RegularWithoutAnd() {
         String expectedValue = "Cent";
 
         String word = NumberToFrenchWordConverter.convert(100L);
@@ -15,7 +15,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegularWithoutAndAboveHundred() {
+    public void RegularWithoutAndAboveHundred() {
         String expectedValue = "Cent soixante mille cent";
 
         String word = NumberToFrenchWordConverter.convert(160100L);
@@ -23,7 +23,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegular() {
+    public void Regular() {
         String expectedValue = "Cent treize";
 
         String word = NumberToFrenchWordConverter.convert(113L);
@@ -31,7 +31,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegularLessThanTwenty() {
+    public void RegularLessThanTwenty() {
         String word = NumberToFrenchWordConverter.convert(13L);
 
         String expectedValue = "Treize";
@@ -39,7 +39,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegularLessThanHundred() {
+    public void RegularLessThanHundred() {
         String word = NumberToFrenchWordConverter.convert(85L);
 
         String expectedValue = "Quatre-vingt-cinq";
@@ -47,7 +47,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegularThousands() {
+    public void RegularThousands() {
         String word = NumberToFrenchWordConverter.convert(5237L);
 
         String expectedValue = "Cinquante-deux cent trente-sept";
@@ -55,7 +55,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchRegularNegativeTen() {
+    public void RegularNegativeTen() {
         String word = NumberToFrenchWordConverter.convert(-10L);
 
         String expectedValue = "Moins dix";
@@ -63,7 +63,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchEdgeCase() {
+    public void EdgeCase() {
         String word = NumberToFrenchWordConverter.convert(-0L);
 
         String expectedValue = "Zéro";
@@ -71,7 +71,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchNegativeNumber() {
+    public void NegativeNumber() {
         String word = NumberToFrenchWordConverter.convert(-85L);
 
         String expectedValue = "Moins quatre-vingt-cinq";
@@ -79,7 +79,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchEdgeCaseIntLimitMax() {
+    public void EdgeCaseIntLimitMax() {
         String word = NumberToFrenchWordConverter.convert(2147483647L);
 
         String expectedValue = "Deux milliard cent quarante-sept million quatre cent quatre-vingt-trois" +
@@ -88,7 +88,7 @@ public class NumberToFrenchWordConverterTest {
     }
 
     @Test
-    public void testFrenchEdgeCaseIntLimitMin() {
+    public void EdgeCaseIntLimitMin() {
         String word = NumberToFrenchWordConverter.convert(-2147483648L);
 
         String expectedValue = "Moins deux milliard cent quarante-sept million quatre cent " +
