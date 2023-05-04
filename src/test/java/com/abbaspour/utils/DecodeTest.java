@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class DecodeTest {
 
     @Test
-    public void testHexadecimalStringRegularOne() {
+    public void machineCarl() {
         String code = Decode.generateBitMapFromPattern("0xBBF1").toString();
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
@@ -18,7 +18,7 @@ public class DecodeTest {
     }
 
     @Test
-    public void testHexadecimalStringRegularTwo() {
+    public void machineBeansCarl() {
         String code = Decode.generateBitMapFromPattern("0x33A3").toString();
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":false," +
@@ -29,7 +29,7 @@ public class DecodeTest {
     }
 
     @Test
-    public void testHexadecimalStringRegularThree() {
+    public void machineCarlNumber() {
         String code = Decode.generateBitMapFromPattern("0x99C1").toString();
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
@@ -40,7 +40,7 @@ public class DecodeTest {
     }
 
     @Test
-    public void testHexadecimalStringRegularFour() {
+    public void zero() {
         String code = Decode.generateBitMapFromPattern("0x0000").toString();
 
         String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
@@ -51,7 +51,7 @@ public class DecodeTest {
     }
 
     @Test
-    public void testHexadecimalStringRegularFive() {
+    public void machine() {
         String code = Decode.generateBitMapFromPattern("0x0101").toString();
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
@@ -61,7 +61,7 @@ public class DecodeTest {
         assertEquals(expectedValue, code);
     }
     @Test
-    public void testHexadecimalStringRegularSix() {
+    public void allTrueZero() {
         String code = Decode.generateBitMapFromPattern("0xF00f").toString();
 
         String expectedValue = "{\"machine_on\":true,\"grinding_beans\":true,\"empty_grounds_fault\":true," +
@@ -71,7 +71,7 @@ public class DecodeTest {
         assertEquals(expectedValue, code);
     }
     @Test
-    public void testHexadecimalStringRegularSeven() {
+    public void allFalse() {
         String code = Decode.generateBitMapFromPattern("0x0ff0").toString();
 
         String expectedValue = "{\"machine_on\":false,\"grinding_beans\":false,\"empty_grounds_fault\":false," +
