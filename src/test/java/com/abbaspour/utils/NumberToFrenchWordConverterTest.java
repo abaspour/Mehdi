@@ -82,7 +82,7 @@ public class NumberToFrenchWordConverterTest {
     public void testFrenchEdgeCaseIntLimitMax() {
         String word = NumberToFrenchWordConverter.convert(2147483647L);
 
-        String expectedValue = "Deux milliards cent quarante-sept millions quatre cent quatre-vingt-trois" +
+        String expectedValue = "Deux milliard cent quarante-sept million quatre cent quatre-vingt-trois" +
                 " mille six cent quarante-sept";
         assertEquals(expectedValue, word);
     }
@@ -91,7 +91,7 @@ public class NumberToFrenchWordConverterTest {
     public void testFrenchEdgeCaseIntLimitMin() {
         String word = NumberToFrenchWordConverter.convert(-2147483648L);
 
-        String expectedValue = "Moins deux milliards cent quarante-sept millions quatre cent " +
+        String expectedValue = "Moins deux milliard cent quarante-sept million quatre cent " +
                 "quatre-vingt-trois mille six cent quarante-huit";
         assertEquals(expectedValue, word);
     }

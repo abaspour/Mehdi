@@ -11,7 +11,7 @@ public class NumberToFrenchWordConverter  {
     private static final String[] tens = {"", "", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingt", "quatre-vingt-dix"};
 
     private static final HashMap<Integer, String> numberMap = new HashMap<Integer, String>();
-
+    static int[] myArray = { 0, 100, 1000, 1000000 , 1000000000 };
     static {
         numberMap.put(0, "zéro");
         numberMap.put(100, "cent");
@@ -40,10 +40,7 @@ public class NumberToFrenchWordConverter  {
         return convertToFrench(n);
     }
 
-    private static String convertToFrench(long n) {
-        if (n < 0) {
-            return "moins " + convertToFrench(-n);
-        }
+    private static String convertToFrench(Long n) {
 
         if (n < 20) {
             return units[(int) (n % 100)];
@@ -62,10 +59,10 @@ public class NumberToFrenchWordConverter  {
             }
         }
 
-        for (int number : numberMap.keySet()) {
-            if (n < (int) number * 1000) {
-                int quotient = (int)(n / number);
-                int remainder =(int)(n % number);
+        for (int number : myArray) {
+            if (n < Long.valueOf(number)  * 1000) {
+                long quotient = (n / number);
+                Long remainder =(n % number);
 
                 String word = numberMap.get(number);
                 if (number == 100) {
@@ -80,9 +77,9 @@ public class NumberToFrenchWordConverter  {
                     }
                 } else {
                     if (quotient == 1 && remainder == 0) {
-                        return convertToFrench(number) + " " + word;
+                        return convertToFrench(Long.valueOf(number)) + " " + word;
                     } else if (quotient == 1) {
-                        return convertToFrench(number) + " " + word + " " + convertToFrench(remainder);
+                        return convertToFrench(Long.valueOf(number)) + " " + word + " " + convertToFrench(remainder);
                     } else if (remainder == 0) {
                         return convertToFrench(quotient) + " " + word;
                     } else {
