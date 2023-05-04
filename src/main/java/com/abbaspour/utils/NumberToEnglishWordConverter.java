@@ -52,18 +52,19 @@ public class NumberToEnglishWordConverter {
     }
 
     private static String convertLessThan1000(int number, boolean shouldAddAndString) {
+        String andString = "";
+        if (shouldAddAndString) {
+            andString = "and ";
+        }
+
         if (number == 0) {
             return "";
         }
         if (number < 20) {
-            return ONES[number];
+            return andString + ONES[number];
         }
         if (number < 100) {
-            return TENS[number / 10] + " " + ONES[number % 10];
-        }
-        String andString = "";
-        if (shouldAddAndString) {
-            andString = "and ";
+            return andString + TENS[number / 10] + " " + ONES[number % 10];
         }
 
         return ONES[number / 100] + " hundred " + andString + convertLessThan1000(number % 100, false);
