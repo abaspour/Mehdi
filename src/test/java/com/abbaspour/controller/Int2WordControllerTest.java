@@ -150,7 +150,6 @@ public class Int2WordControllerTest {
         String number = "9999999999";
         String expectedValue = "over MAX_VALUE.";
 
-
         ResultActions response = mockMvc.perform(get("/api/int-to-word/{language}/{number}", language,number));
 
         response.andExpect(status().is(400))
